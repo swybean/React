@@ -1,14 +1,14 @@
 // 액션 타입 정의
-export const INIT_ITEM = 'emotiondiary/items/INIT_ITEM' as const;
-export const CREATE_ITEM = 'emotiondiary/items/CREATE_ITEM' as const;
-export const REMOVE_ITEM = 'emotiondiary/items/REMOVE_ITEM' as const;
-export const EDIT_ITEM = 'emotiondiary/items/EDIT_ITEM' as const;
+export const INIT_ITEM = "emotiondiary/items/INIT_ITEM" as const;
+export const CREATE_ITEM = "emotiondiary/items/CREATE_ITEM" as const;
+export const REMOVE_ITEM = "emotiondiary/items/REMOVE_ITEM" as const;
+export const EDIT_ITEM = "emotiondiary/items/EDIT_ITEM" as const;
 
 // 액션 생성 함수
 export const initItem = (data: Array<DiaryItemType>) => ({
   type: INIT_ITEM,
   data,
-})
+});
 
 export const createItem = (
   dataId: string,
@@ -53,7 +53,7 @@ type DiaryItemActionType =
   | ReturnType<typeof initItem>
   | ReturnType<typeof createItem>
   | ReturnType<typeof removeItem>
-  | ReturnType<typeof editItem>
+  | ReturnType<typeof editItem>;
 
 export type DiaryItemType = {
   id: string;
@@ -64,7 +64,6 @@ export type DiaryItemType = {
 };
 
 export type DiaryItemStateType = Array<DiaryItemType>;
-
 
 // 초기값
 const InitialState: DiaryItemStateType = [];
@@ -87,7 +86,7 @@ export default function reducer(
       break;
     }
     case EDIT_ITEM: {
-      newState = previousState.map((it) => 
+      newState = previousState.map((it) =>
         it.id === action.data.id ? { ...action.data } : it
       );
       break;
@@ -95,7 +94,6 @@ export default function reducer(
     default:
       return previousState;
   }
-  localStorage.setItem('diary', JSON.stringify(newState));
+  localStorage.setItem("diary", JSON.stringify(newState));
   return newState;
 }
-
