@@ -27,7 +27,7 @@ const MyButton = ({ text, type, onClick }: PropsType) => {
   return (
     <button
       // 버튼의 클랙스를 설정 -> Mybutton과 위에서 결정된 추가 클랙스를 설정
-      className={["Mybutton", `MyButton_${btnType}`].join(" ")}
+      className={["MyButton", `MyButton_${btnType}`].join(" ")}
       onClick={onClick}
     >
       {text}

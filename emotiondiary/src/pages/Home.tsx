@@ -1,6 +1,11 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 
+import MyHeader from "../components/MyHeader";
+import MyButton from "../components/MyButton";
+import DiaryList from "../components/DiaryList";
+import MyCountScore from "../components/MyCountScore";
+
 import { useSelector } from "react-redux";
 import { DiaryItemType } from "../redux/modules/items";
 import { RootState } from "../redux/modules/reducer";
@@ -41,10 +46,11 @@ const Home = () => {
       //   diaryList.filter((it) => firstDay <= it.date && it.date <= lastDay)
       // );
       setData(
-        diaryList.filter(
-          (it) =>
-            firstDay <= (it.date as number) && (it.date as number) <= lastDay
-        )
+        // diaryList.filter(
+        //   (it) =>
+        //     firstDay <= (it.date as number) && (it.date as number) <= lastDay
+        // )
+        diaryList.filter((it) => firstDay <= it.date && it.date <= lastDay)
       );
     }
   }, [diaryList, curDate]);
@@ -71,8 +77,24 @@ const Home = () => {
   const { allCount, badCount, goodCount } = getDiaryAnalysis;
 
   return (
-    <div>
-      <p>이건 홈</p>
+    <div className="HomePage">
+      <MyHeader
+        headText={headText}
+        leftChild={
+          <MyButton text={<BiChevronLeft />} onClick={decreaseMonth} />
+        }
+        rightChild={
+          <MyButton text={<BiChevronRight />} onClick={increaseMonth} />
+        }
+      />
+      <div className="home_page_inner">
+        <MyCountScore
+          allCount={allCount}
+          goodCount={goodCount}
+          badCount={badCount}
+        />
+        <DiaryList diaryList={data} />
+      </div>
     </div>
   );
 };
